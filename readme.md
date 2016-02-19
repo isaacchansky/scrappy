@@ -1,6 +1,8 @@
 # Scrappy API
 A scrappy little screen scraping API.
 
+[When scraping data, please consider the website's terms of use](https://en.wikipedia.org/wiki/Web_scraping#Legal_issues)
+
 ## Docs
 
 ### `/v1/parse`
