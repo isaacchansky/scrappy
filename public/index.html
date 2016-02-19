@@ -6,5 +6,31 @@
   </head>
   <body>
     <h1>A scrappy little screen scraping API for turning html pages into json.</h1>
+
+    <h2>Docs:</h2>
+    <h3><code>/v1/parse</code></h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Parameter</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>url (<strong>required</strong>)</td>
+          <td>The url of the web page to be scraped</td>
+        </tr>
+        <tr>
+          <td>textOnly (<strong>optional</strong>)</td>
+          <td>Set this to true if you want to only ever return text, never html. This is useful if you have markup like  <code>&lt;td&gt; 100 &lt;span class="label"&gt;cm&lt;/span&gt;&lt;/td&gt;</code> and would prefer to have <code>... width: '100 cm', ...</code> returned, rather than <code>... width: '100 &lt;span class="label"&gt;cm&lt;/span&gt;', ...</code></td>
+        </tr>
+        <tr>
+          <td>* (anything except 'url' or 'textOnly')</td>
+          <td>These are the attributes of your returned data structure. The values of these parameters <strong>must be jQuery style selectors</strong> (exmaples: <code>table.locations &gt; tr:last-child &gt; td:last-child</code>, <code>title</code> )</td>
+        </tr>
+      </tbody>
+    </table>
+
   </body>
 </html>

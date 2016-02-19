@@ -43,7 +43,6 @@ function parseAttributes(req, res, next) {
   req.scrappy.jsonAttr = {};
   var attributes = Object.keys(req.query).filter((k) => ['url','textOnly'].indexOf(k) < 0);
   var page = cheerio.load(req.scrappy.html);
-  console.log(req.query);
   attributes.forEach(function(attr) {
     var selector = req.query[attr];
     if(req.query.textOnly && req.query.textOnly.toLowerCase() != "false") {
@@ -53,7 +52,7 @@ function parseAttributes(req, res, next) {
     }
   });
 
-  req.scrappy.jsonAttr['fullPageContent'] = page.html();
+  req.scrappy.jsonAttr.fullPageContent = page.html();
 
   next();
 }
