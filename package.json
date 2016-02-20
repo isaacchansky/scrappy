@@ -4,17 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "./node_modules/nodemon/bin/nodemon.js index.js"
+    "test": "mocha test",
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.0",
     "cheerio": "^0.20.0",
     "express": "^4.13.4",
     "request": "^2.69.0"
   },
   "devDependencies": {
-    "nodemon": "^1.9.0"
+    "chai": "^3.5.0",
+    "hippie": "^0.4.0",
+    "mocha": "^2.4.5",
+    "nodemon": "^1.9.0",
+    "supertest": "^1.2.0"
   }
 }
