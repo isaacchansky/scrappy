@@ -4,7 +4,7 @@ A scrappy little screen scraping API.
 [When scraping data, please consider the website's terms of use](https://en.wikipedia.org/wiki/Web_scraping#Legal_issues)
 
 
-demo at [https://still-depths-95289.herokuapp.com](https://scrappyapi.herokuapp.com/)
+demo at [https://scrappyapi.herokuapp.com/](https://scrappyapi.herokuapp.com/)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
