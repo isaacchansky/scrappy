@@ -68,19 +68,21 @@ function pullPageContent(req, res, next) {
  */
 function parseAttributes(req, res, next) {
   req.scrappy.jsonAttr = {};
-  var attributes = Object.keys(req.query).filter((k) => ['url', 'textOnly'].indexOf(
+  var attributes = Object.keys(req.query).filter((k) => ['_url', '_returnFullMarkup', '_textOnly'].indexOf(
     k) < 0);
   var page = cheerio.load(req.scrappy.html);
   attributes.forEach(function(attr) {
     var selector = req.query[attr];
-    if (req.query.textOnly && req.query.textOnly.toLowerCase() != "false") {
+    if (req.query._textOnly && req.query._textOnly.toLowerCase() != "false") {
       req.scrappy.jsonAttr[attr] = page(selector).text();
     } else {
       req.scrappy.jsonAttr[attr] = page(selector).html();
     }
   });
 
-  req.scrappy.jsonAttr.fullPageContent = page.html();
+  if(req.query._returnFullMarkup && req.query._returnFullMarkup.toLowerCase() != "false") {
+    req.scrappy.jsonAttr.fullPageMarkup = page.html();
+  }
 
   next();
 }
@@ -95,7 +97,7 @@ FOR NON COLLECTIONS
   "_url": <URL String>,
   "_attributes": {
     <ATTR> : {
-      "_type": <"number" | "type" | "text" | "html">,
+      "_type": <"number" | "text" | "html">,
       "_selector": <jQuery Selector>
     },
     ...
@@ -114,13 +116,13 @@ FOR COLLECTIONS:
       "_children": {
 
         - IF SIMPLE COLLECTION
-        "_type": <"number" | "type" | "text" | "html">,
+        "_type": <"number" | "text" | "html">,
         "_selector": <jQuery Selector>,
 
         - IF COMPLEX (object) COLLECTION
         "_object": {
           <ATTR> : {
-            "_type": <"number" | "type" | "text" | "html">,
+            "_type": <"number" | "text" | "html">,
             "_selector": <jQuery Selector>,
           }
         }
@@ -143,7 +145,6 @@ function isValidAttrType(type, allowCollection) {
 
 function coerceType(content, type) {
   content = cheerio(content);
-  // console.log(content);
   if (type === "number") {
     return parseInt(content.text(), 10);
   } else if (type === "text") {
